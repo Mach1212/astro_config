@@ -1,9 +1,15 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+-- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 
 -- AstroCore provides a central place to modify mappings, vim options, autocommands, and more!
 -- Configuration documentation can be found with `:h astrocore`
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
+
+local sections = {
+  R = { desc = require("astroui").get_icon("Package", 1, true) .. "Rust" },
+  r = { desc = require("astroui").get_icon("ActiveLSP", 1, true) .. "Refactor" },
+  A = { desc = require("astroui").get_icon("ActiveLSP", 1, true) .. "AI" },
+}
 
 ---@type LazySpec
 return {
@@ -27,6 +33,7 @@ return {
     -- vim options can be configured here
     options = {
       opt = { -- vim.opt.<key>
+        mouse = "",
         relativenumber = true, -- sets vim.opt.relativenumber
         number = true, -- sets vim.opt.number
         spell = false, -- sets vim.opt.spell
@@ -37,6 +44,14 @@ return {
         -- configure global vim variables (vim.g)
         -- NOTE: `mapleader` and `maplocalleader` must be set in the AstroNvim opts or before `lazy.setup`
         -- This can be found in the `lua/lazy_setup.lua` file
+        mapleader = " ", -- sets vim.g.mapleader
+        autoformat_enabled = true, -- enable or disable auto formatting at start (lsp.formatting.format_on_save must be enabled)
+        cmp_enabled = true, -- enable completion at start
+        autopairs_enabled = true, -- enable autopairs at start
+        diagnostics_mode = 3, -- set the visibility of diagnostics in the UI (0=off, 1=only show in status line, 2=virtual text off, 3=all on)
+        icons_enabled = true, -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
+        ui_notifications_enabled = true, -- disable notifications when toggling UI elements
+        resession_enabled = false, -- enable experimental resession.nvim session management (will be default in AstroNvim v4)
       },
     },
     -- Mappings can be configured through AstroCore as well.
@@ -64,10 +79,51 @@ return {
         ["<Leader>b"] = { desc = "Buffers" },
         -- quick save
         -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
+
+        ["<leader>R"] = sections.R,
+        ["<leader>Rt"] = { function() require("crates").toggle() end, desc = "Toggle" },
+        -- ["<leader>RR"] = { function() require("crates").reload() end, desc = "Reload" },
+
+        ["<leader>Rv"] = { function() require("crates").show_versions_popup() end, desc = "Versions" },
+        ["<leader>Rf"] = { function() require("crates").show_features_popup() end, desc = "Features" },
+        ["<leader>Rd"] = { function() require("crates").show_dependencies_popup() end, desc = "Dependencies" },
+
+        ["<leader>Ru"] = { function() require("crates").update_crate() end, desc = "Update" },
+        ["<leader>Ra"] = { function() require("crates").update_all_crates() end, desc = "Update All" },
+        ["<leader>RU"] = { function() require("crates").update_crate() end, desc = "Upgrade" },
+        ["<leader>RA"] = { function() require("crates").upgrade_all_crates() end, desc = "Upgrade Crates" },
+
+        ["<leader>RH"] = { function() require("crates").open_homepage() end, desc = "Homepage" },
+        ["<leader>RR"] = { function() require("crates").open_repository() end, desc = "Repo" },
+        ["<leader>RD"] = { function() require("crates").open_documentation() end, desc = "Documentation" },
+        ["<leader>RC"] = { function() require("crates").open_crates_io() end, desc = "Crates.io" },
+
+        ["<leader>Rr"] = { function() require("rust-tools").runnables.runnables() end, desc = "Runnables" },
+
+        ["<leader>r"] = sections.r,
+
+        -- ["<leader>A"] = sections.A,
+        -- ["<leader>Aa"] = { "<cmd>Gen<cr>" },
+
+        -- ["<leader>uW"] = { "<cmd>ASToggle<cr>", desc = "Toggle auto-save" },
+        ["<leader>td"] = {
+          function() require("astrocore").toggle_term_cmd "sudo lazydocker" end,
+          desc = "ToggleTerm LazyDocker",
+        },
       },
       t = {
         -- setting a mapping to false will disable it
         -- ["<esc>"] = false,
+      },
+      v = {
+        ["<leader>R"] = sections.R,
+        ["<leader>Ru"] = { function() require("crates").update_crates() end, desc = "Update" },
+        ["<leader>RU"] = { function() require("crates").upgrade_crates() end, desc = "Upgrade" },
+
+        ["<leader>r"] = sections.r,
+
+        ["<leader>A"] = sections.A,
+        ["<leader>Aa"] = { "<cmd>Gen<cr>" },
       },
     },
   },

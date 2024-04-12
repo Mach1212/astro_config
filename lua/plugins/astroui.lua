@@ -1,4 +1,4 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+-- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 
 -- AstroUI provides the basis for configuring the AstroNvim User Interface
 -- Configuration documentation can be found with `:h astroui`
@@ -16,6 +16,17 @@ return {
     highlights = {
       init = { -- this table overrides highlights in all themes
         -- Normal = { bg = "#000000" },
+        NotifyINFOBody = { bg = "NONE" },
+        NotifyWARNBody = { bg = "NONE" },
+        NotifyERRORBody = { bg = "NONE" },
+        NotifyDEBUGBody = { bg = "NONE" },
+        NotifyTRACEBody = { bg = "NONE" },
+        NotifyINFOBorder = { bg = "NONE" },
+        NotifyWARNBorder = { bg = "NONE" },
+        NotifyERRORBorder = { bg = "NONE" },
+        NotifyDEBUGBorder = { bg = "NONE" },
+        NotifyTRACEBorder = { bg = "NONE" },
+        NotifyBackground = { bg = "#000000" },
       },
       astrotheme = { -- a table of overrides/changes when applying the astrotheme theme
         -- Normal = { bg = "#000000" },

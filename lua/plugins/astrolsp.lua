@@ -1,4 +1,4 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+-- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 
 -- AstroLSP allows you to customize the features in AstroNvim's LSP configuration engine
 -- Configuration documentation can be found with `:h astrolsp`
@@ -46,7 +46,83 @@ return {
     ---@diagnostic disable: missing-fields
     config = {
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
+      -- denols = function(opts)
+      --   opts.root_dir = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc")
+      --   return opts
+      -- end,
+      -- tsserver = function(opts)
+      --   opts.root_dir = require("lspconfig.util").root_pattern "package.json"
+      --   return opts
+      -- end,
+      -- -- For eslint:
+      -- eslint = function(opts)
+      --   opts.root_dir =
+      --     require("lspconfig.util").root_pattern("package.json", ".eslintrc.json", ".eslintrc.js", ".eslintrc.cjs")
+      --   return opts
+      -- end,
+      yamlls = {
+        settings = {
+          yaml = {
+            schemas = {
+              kubernetes = "*.yaml",
+              ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
+              ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
+              ["http://json.schemastore.org/ansible-stable-2.9"] = "roles/tasks/*.{yml,yaml}",
+              ["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
+              ["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
+              ["http://json.schemastore.org/ansible-playbook"] = "*play*.{yml,yaml}",
+              ["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
+              ["https://json.schemastore.org/dependabot-v2"] = ".github/dependabot.{yml,yaml}",
+              ["https://json.schemastore.org/gitlab-ci"] = "*gitlab-ci*.{yml,yaml}",
+              ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json"] = "*api*.{yml,yaml}",
+              ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "*docker-compose*.{yml,yaml}",
+              ["https://raw.githubusercontent.com/argoproj/argo-workflows/master/api/jsonschema/schema.json"] = "*flow*.{yml,yaml}",
+            },
+          },
+        },
+      },
     },
+    plugins = {
+      { -- override nvim-cmp plugin
+        "hrsh7th/nvim-cmp",
+        -- override the options table that is used in the `require("cmp").setup()` call
+        opts = function(_, opts)
+          -- opts parameter is the default options table
+          -- the function is lazy loaded so cmp is able to be required
+          local cmp = require "cmp"
+          -- modify the sources part of the options table
+          opts.sources = cmp.config.sources {
+            { name = "jupynium", priority = 1250 }, -- consider higher priority than LSP
+            { name = "nvim_lsp", priority = 1000 },
+            { name = "luasnip", priority = 750 },
+            { name = "buffer", priority = 500 },
+            { name = "path", priority = 250 },
+          }
+          -- return the new table to be used
+          return opts
+        end,
+      },
+      {
+        "jay-babu/mason-null-ls.nvim",
+        opts = {
+          handlers = {
+            prettierd = function()
+              require("null-ls").register(require("null-ls").builtins.formatting.prettierd.with {
+                condition = function(utils)
+                  return utils.root_has_file { "package.json", ".prettierrc", ".prettierrc.json", ".prettierrc.js" }
+                end,
+              })
+            end,
+            deno_fmt = function()
+              require("null-ls").register(require("null-ls").builtins.formatting.deno_fmt.with {
+                condition = function(utils) return utils.root_has_file { "deno.jsonc", "deno.json" } end,
+              })
+            end,
+          },
+        },
+      },
+    },
+
     -- customize how language servers are attached
     handlers = {
       -- a function without a key is simply the default handler, functions take two parameters, the server name and the configured options table for that server
