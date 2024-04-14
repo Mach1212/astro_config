@@ -77,6 +77,16 @@ return {
   { import = "astrocommunity.utility.noice-nvim" },
 
   { import = "astrocommunity.color.transparent-nvim" },
+  {
+      "AstroNvim/astrocore",
+      opts = {
+        mappings = {
+          n = {
+            ["<Leader>uT"] = { "<cmd>TransparentToggle<cr>", desc = "Toggle transparency" },
+          },
+        },
+      },
+  }
 
   { import = "astrocommunity.editing-support.neogen" },
   -- { import = "astrocommunity.editing-support.auto-save-nvim" },
