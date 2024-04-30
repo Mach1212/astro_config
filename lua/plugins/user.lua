@@ -83,6 +83,7 @@ return {
   --   end,
   -- },
   -- **************************************************** --
+  { "diogo464/kubernetes.nvim" },
   {
     "kiyoon/jupynium.nvim",
     build = "pip3 install --user .",
@@ -109,5 +110,4 @@ return {
       }
     end,
   },
-  { "diogo464/kubernetes.nvim" },
 }
