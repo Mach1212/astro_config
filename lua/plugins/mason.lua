@@ -4,6 +4,15 @@
 
 ---@type LazySpec
 return {
+  {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      opts.max_concurrent_installers = 8
+      opts.pip = {
+        install_args = { "--target=" },
+      }
+    end,
+  },
   -- use mason-lspconfig to configure LSP installations
   {
     "williamboman/mason-lspconfig.nvim",
