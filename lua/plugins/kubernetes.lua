@@ -10,7 +10,7 @@ return {
           settings = {
             yaml = {
               schemas = {
-                [require("kubernetes").yamlls_schema()] = "*.yaml",
+                [require("kubernetes").yamlls_schema()] = "*.k3s.{yml,yaml}",
               },
             },
           },
