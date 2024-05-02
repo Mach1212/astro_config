@@ -110,8 +110,8 @@ return {
           function() require("astrocore").toggle_term_cmd "sudo lazydocker" end,
           desc = "ToggleTerm LazyDocker",
         },
-        
-        ["<leader>uT"] = { "<cmd>ToggleTransparency<cr>", desc = "Toggle transparency" },
+
+        ["<Leader>uT"] = { "<cmd>TransparentToggle<cr>", desc = "Toggle transparency" },
       },
       t = {
         -- setting a mapping to false will disable it
