@@ -77,6 +77,10 @@ return {
   { import = "astrocommunity.utility.noice-nvim" },
 
   { import = "astrocommunity.color.transparent-nvim" },
+  {
+    "xiyaowong/transparent.nvim",
+    config = function() vim.cmd "TransparentEnable" end,
+  },
 
   { import = "astrocommunity.editing-support.neogen" },
   -- { import = "astrocommunity.editing-support.auto-save-nvim" },
