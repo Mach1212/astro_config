@@ -79,7 +79,7 @@ return {
   { import = "astrocommunity.color.transparent-nvim" },
   {
     "xiyaowong/transparent.nvim",
-    config = function() vim.cmd "TransparentEnable" end,
+    build = function() vim.cmd "TransparentEnable" end,
   },
 
   { import = "astrocommunity.editing-support.neogen" },
