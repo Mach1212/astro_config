@@ -109,7 +109,7 @@ return {
             prettierd = function()
               require("null-ls").register(require("null-ls").builtins.formatting.prettierd.with {
                 condition = function(utils)
-                  return utils.root_has_file { "package.json", ".prettierrc", ".prettierrc.json", ".prettierrc.js" }
+                  return utils.root_has_file { ".prettierrc", ".prettierrc.json", ".prettierrc.js" }
                 end,
               })
             end,
@@ -134,6 +134,18 @@ return {
     },
     -- Configure buffer local auto commands to add when attaching a language server
     autocmds = {
+      dioxus_autoformat_on_save = {
+        cond = function(client, bufnr)
+          return client.name == "rust-analyzer"
+            and require("null-ls.utils").make_conditional_utils().has_file { "Dioxus.toml" }
+        end,
+        {
+          event = { "BufWritePost" },
+          desc = "Auto-format Rust files after saving",
+          callback = function() vim.cmd ":!dx fmt" end,
+        },
+      },
+
       -- first key is the `augroup` to add the auto commands to (:h augroup)
       lsp_document_highlight = {
         -- Optional condition to create/delete auto command group
