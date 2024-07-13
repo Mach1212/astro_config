@@ -106,13 +106,13 @@ return {
         -- ["<leader>Aa"] = { "<cmd>Gen<cr>" },
 
         -- ["<leader>wT"] = { "<cmd>ASToggle<cr>", desc = "Toggle auto-save" },
-        ["<leader>wW"] = { "<cmd>wall<cr>", desc = "Save all" },
-        ["<leader>uN"] = {
+        ["<leader>ww"] = { "<cmd>wall<cr>", desc = "Save all" },
+        ["<Leader>uN"] = {
           function()
             require("astrocore.toggles").notifications()
             require("notify").dismiss { silent = true }
           end,
-          desc = "Toggle Notifications",
+          desc = "Toggle'n Clear Notifications",
         },
 
         ["<leader>td"] = {
