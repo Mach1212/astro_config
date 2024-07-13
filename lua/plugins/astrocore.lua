@@ -105,7 +105,16 @@ return {
         -- ["<leader>A"] = sections.A,
         -- ["<leader>Aa"] = { "<cmd>Gen<cr>" },
 
-        -- ["<leader>uW"] = { "<cmd>ASToggle<cr>", desc = "Toggle auto-save" },
+        -- ["<leader>wT"] = { "<cmd>ASToggle<cr>", desc = "Toggle auto-save" },
+        ["<leader>wW"] = { "<cmd>wall<cr>", desc = "Save all" },
+        ["<leader>uN"] = {
+          function()
+            require("astrocore.toggles").notifications()
+            require("notify").dismiss { silent = true }
+          end,
+          desc = "Toggle Notifications",
+        },
+
         ["<leader>td"] = {
           function() require("astrocore").toggle_term_cmd "sudo lazydocker" end,
           desc = "ToggleTerm LazyDocker",
