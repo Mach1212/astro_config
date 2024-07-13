@@ -28,7 +28,7 @@ return {
         NotifyTRACEBorder = { bg = "NONE" },
         NotifyBackground = { bg = "#000000" },
       },
-      astrotheme = { -- a table of overrides/changes when applying the astrotheme theme
+      astrodark = { -- a table of overrides/changes when applying the astrotheme theme
         -- Normal = { bg = "#000000" },
       },
     },
