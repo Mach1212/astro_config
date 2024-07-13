@@ -60,13 +60,13 @@ return {
     "echasnovski/mini.surround",
     opts = {
       mappings = {
-        add = "<leader>zf", -- Add surrounding in Normal and Visual modes
-        delete = "<leader>zd", -- Delete surrounding
-        find = "", -- Find surrounding (to the right)
-        find_left = "", -- Find surrounding (to the left)
+        add = "Ss", -- Add surrounding in Normal and Visual modes
+        delete = "dD", -- Delete surrounding
+        find = "Sl", -- Find surrounding (to the right)
+        find_left = "SL", -- Find surrounding (to the left)
         highlight = "", -- Highlight surrounding
-        replace = "<leader>zr", -- Replace surrounding
-        update_n_lines = "<leader>zn", -- Update `n_lines`
+        replace = "Sr", -- Replace surrounding
+        update_n_lines = "Sn", -- Update `n_lines`
 
         suffix_last = "N", -- Suffix to search with "prev" method
         suffix_next = "n", -- Suffix to search with "next" method
@@ -86,7 +86,7 @@ return {
   -- { import = "astrocommunity.editing-support.auto-save-nvim" },
   -- {
   --   "Pocco81/auto-save.nvim",
-  --   opt = { enabled = false },
+  --   opts = { enabled = false },
   -- },
   { import = "astrocommunity.editing-support.refactoring-nvim" },
   { import = "astrocommunity.editing-support.nvim-regexplainer" },
