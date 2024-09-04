@@ -12,7 +12,7 @@ return {
         settings = {
           tailwindCSS = {
             experimental = {
-              classRegex = { 'class:\\s*?"(.*)"' },
+              classRegex = { 'class:[\\s\\S]*?"(.*?)"', 'class:[\\s\\S]*?{.*?"(.*?)"' },
             },
           },
         },
