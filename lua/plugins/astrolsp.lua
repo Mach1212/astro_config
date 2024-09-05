@@ -133,6 +133,7 @@ return {
     },
     -- Configure buffer local auto commands to add when attaching a language server
     autocmds = {
+      eslint_fix_on_save = false,
       dioxus_autoformat_on_save = {
         cond = function(client, bufnr)
           return client.name == "rust-analyzer"

@@ -5,6 +5,9 @@
 ---@type LazySpec
 return {
   "nvimtools/none-ls.nvim",
+  dependencies = {
+    "nvimtools/none-ls-extras.nvim",
+  },
   opts = function(_, opts)
     -- config variable is the default configuration table for the setup function call
     local null_ls = require "null-ls"
@@ -19,6 +22,9 @@ return {
       -- Set a formatter
       -- null_ls.builtins.formatting.stylua,
       -- null_ls.builtins.formatting.prettier,
+      require "none-ls.diagnostics.eslint",
+      require "none-ls.code_actions.eslint",
+      require "none-ls.formatting.eslint",
       null_ls.builtins.formatting.prettierd.with {
         filetypes = { "toml", "java" },
       },
