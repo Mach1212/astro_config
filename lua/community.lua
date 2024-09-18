@@ -9,6 +9,8 @@ return {
   "AstroNvim/astrocommunity",
   -- import/override with your plugins folder
 
+  { import = "astrocommunity.recipes.telescope-lsp-mappings" },
+
   { import = "astrocommunity.pack.cpp" },
   { import = "astrocommunity.pack.lua" },
   { import = "astrocommunity.pack.nix" },
@@ -60,16 +62,16 @@ return {
     "echasnovski/mini.surround",
     opts = {
       mappings = {
-        add = "Ss", -- Add surrounding in Normal and Visual modes
-        delete = "dD", -- Delete surrounding
-        find = "Sl", -- Find surrounding (to the right)
-        find_left = "SL", -- Find surrounding (to the left)
-        highlight = "", -- Highlight surrounding
-        replace = "Sr", -- Replace surrounding
+        add = "Ss",            -- Add surrounding in Normal and Visual modes
+        delete = "dD",         -- Delete surrounding
+        find = "Sl",           -- Find surrounding (to the right)
+        find_left = "SL",      -- Find surrounding (to the left)
+        highlight = "",        -- Highlight surrounding
+        replace = "Sr",        -- Replace surrounding
         update_n_lines = "Sn", -- Update `n_lines`
 
-        suffix_last = "N", -- Suffix to search with "prev" method
-        suffix_next = "n", -- Suffix to search with "next" method
+        suffix_last = "N",     -- Suffix to search with "prev" method
+        suffix_next = "n",     -- Suffix to search with "next" method
       },
     },
   },

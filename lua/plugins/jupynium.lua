@@ -3,7 +3,7 @@ return {
   build = "pip3 install .",
   -- build = "conda run --no-capture-output -n jupynium pip install .",
   -- enabled = vim.fn.isdirectory(vim.fn.expand "~/miniconda3/envs/jupynium"),
-  -- event = "VeryLazy",
+  event = "VeryLazy",
   ft = "python,rust",
   config = function()
     require("jupynium").setup {
